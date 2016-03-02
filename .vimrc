@@ -1,0 +1,445 @@
+" -------- Vundle
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+"se git:// as default protocol.
+let g:vundle_default_git_proto="git"
+
+Plugin 'gmarik/Vundle.vim'
+
+"--------- Colorscheme
+Plugin 'tomasr/molokai'
+Plugin 'reedes/vim-colors-pencil'
+
+"--------- UI & Window & Utils
+Plugin 'itchyny/lightline.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
+"Plugin 'kien/ctrlp.vim'
+Plugin 'taglist.vim'
+
+"--------- Edit
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-commentary'
+Plugin 'sjl/gundo.vim'
+Plugin 'terryma/vim-multiple-cursors'
+
+"--------- Snipmate
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'honza/vim-snippets'
+Plugin 'garbas/vim-snipmate'
+
+"--------- Javascript
+Plugin 'jsbeautify'
+Plugin 'jQuery'
+Plugin 'pangloss/vim-javascript'
+
+"-------- Python
+Plugin 'pep8'
+Plugin 'python.vim--Vasiliev'
+Plugin 'hynek/vim-python-pep8-indent'
+"Plugin 'davidhalter/jedi-vim'
+
+"-------- Git
+Plugin 'tpope/vim-fugitive'
+
+"-------- C/C++
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'vim-scripts/a.vim'
+
+"-------- Go
+Plugin 'fatih/vim-go'
+Plugin 'dgryski/vim-godef'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+
+"------- Misc Languages
+Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'vim-coffee-script'
+Plugin 'groenewege/vim-less'
+Plugin 'cespare/vim-toml'
+Plugin 'johnmorrow/vim-thrift'
+Plugin 'saltstack/salt-vim'
+Plugin 'jtratner/vim-flavored-markdown'
+Plugin 'elzr/vim-json'
+
+call vundle#end()            " required
+
+
+"-------------------- 根据文件类型(注意，放在bundle之后)------{{{1
+" 针对不同的文件类型加载对应的插件
+" 针对不同的文件类型采用不同的缩进格式
+filetype plugin indent on
+"--------------------------------------------------------------1}}}
+
+"-------------- 基本-------------------------------------------{{{1
+syntax enable
+se nu  "显示行号
+" set term=xterm-256color
+"终端下名字由vim设置
+set title
+"关闭gui右边边框
+set go=
+"开启256 color
+set t_Co=256
+"允许有未保存的内容时切换缓冲区
+set hidden
+set ttyfast
+syntax on
+"输入的命令显示出来
+set showcmd
+"显示当前模式
+set showmode
+"关闭报警声音
+set noeb
+"开启鼠标定位
+set mouse=a
+"关闭报警声音
+set noeb
+"外部修改后自动更新这个文件
+set autoread
+"告诉vim使用vim的键盘而不是vi的
+set nocompatible
+"关闭启动时的救助贫困儿童的提示消息
+set shortmess=atI
+"高亮当前行
+set cul
+"合适的高亮当前行的颜色
+hi CursorLine term=none cterm=none ctermbg=3
+"高亮当前列
+set cursorcolumn
+"自动切换当前目录为当前文件所在目录
+set autochdir
+"800个字符以上的行不去高亮
+set synmaxcol=800
+set backspace=indent,eol,start
+set gdefault
+"搜索
+set hlsearch
+set incsearch
+
+set nowrap
+
+"状态栏
+set laststatus=2
+set ruler
+
+"------------------------------------------------------------------ 1}}}
+
+" ------------------ gui --------------------------------------------{{{1
+
+set guioptions-=T           " gvim隐藏工具栏
+set guioptions-=m           " gvim隐藏菜单栏
+"设置gvim的字体
+" set guifont=Monaco:h14
+set guifont=Inconsolata-g:h14
+
+"--------------------------------------------------------------------1}}}
+
+"-------------------- 编码 -----------------------------------------{{{1
+
+"vim内部的编码
+set encoding=utf-8
+"新建一个文件的默认编码
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbkgb2312,cp936
+"输出到终端的编码
+set termencoding=utf-8
+"vim写入文件的时候采用的编码
+set fileencoding=utf-8
+
+"""------------------------------------------------------------------1}}}
+
+"---------------------------------- 缩进 -----------------------------{{{1
+"自动缩进
+set autoindent
+"类似C语言风格的缩进
+set cindent
+"智能缩进:每一行都和前一行有相同的缩进量,
+"同时这种缩进形式能正确的识别出花括号,当遇到右花括号（}）,
+"则取消缩进形式。此外还增加了识别C语言关键字的功能。
+"如果一行是以#开头的(比如宏)，那么这种格式将会被特殊对待而不采用缩进格式
+set smartindent
+"----------------------------------------------------------------------1}}}
+
+"------------------ tab键 --------------------------------------------{{{1
+
+"把输入的tab自动转换成空格，Python用户必用~
+set expandtab
+"一个tab键占据4个空格
+set tabstop=4
+"一开始,插入的就是4个空格,此时一旦你再按下一次tab,这次的四个空格就会和上次的四个空格组合起来变成一个制表符
+set softtabstop=4
+"每一级自动缩进的空格数
+set shiftwidth=4
+
+"显示tab键
+set list
+"list键的填充字符
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+
+"根据文件类型设定缩进,覆盖掉默认的~,来自humiaozuzu
+autocmd FileType text setlocal textwidth=79
+autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=79
+autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=79
+autocmd FileType coffee,javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=79
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=79
+autocmd FileType html,htmldjango,xhtml,haml setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=0
+autocmd FileType sass,scss,css setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=79
+autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4 textwidth=79
+"-------------------------------------------------------------------1}}}
+
+
+"-------------------------------鼠标-------------------------
+
+"启用鼠标的使用
+set mouse=a
+"可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
+set selection=exclusive
+set selectmode=mouse,key
+"当敲键盘的时候隐藏鼠标指针
+set mousehide
+set mousemodel=popup
+
+"--------------------------- 折叠 -------------------------
+
+set foldenable
+set foldmethod=manual  "手动折叠
+set foldlevel=3
+
+" --------------------- 匹配 -------------------------------
+
+"高亮显示匹配的括号
+set showmatch
+"匹配括号高亮的时间（单位是十分之一秒）
+set matchtime=1
+
+"------------------- 补全 -----------------------------------
+
+set completeopt=longest,menu
+set cpt=.,w,b
+
+
+"- ------------------------ 插件配置 ----------------------------------------  {{{1
+
+" --------------------------------- molokai {{{2
+let g:rehash256 = 1
+let g:molokai_original = 1
+"-----------------------------------------------2}}}
+
+"--------------------------------- lightline {{{2
+let g:lightline = {'colorscheme': 'wombat',}
+" ------------------------------------------- }}}
+
+"YouCompleteMe
+let g:ycm_key_list_select_completion = ['<Down>']
+
+"Python的高亮
+let g:python_highlight_builtin_objs = 1
+let g:python_highlight_builtin_funcs = 1
+let g:python_highlight_exceptions = 1
+
+"背景:暗色
+set background=dark
+
+if has("gui_macvim")
+    colorscheme molokai
+endif
+
+colorscheme molokai
+
+
+"使vim在终端保持透明
+hi Normal ctermbg=NONE
+
+" --------------------- Nerdtree:窗口浏览器:NERDTreeToggle {{{2
+"vim启动的时候打开nerdtree
+autocmd vimenter * NERDTree
+"打开一个未指明的文件时也打开nerdtree
+"autocmd vimenter * if !argc() | NERDTree | endif
+"最后只剩下nerdtree的时候关闭之
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"nerdtree 的宽度
+let NERDTreeWinSize = 25
+"显示行号
+let NERDTreeShowLineNumbers=1
+let NERDTreeIgnore=['\.pyc$', '\~$']
+"---------------------------------------------------------- 2}}}
+
+"pep8, ctrl-k作为检查快捷键
+let g:pep8_map='<C-b>'
+
+"gundo 宽度
+let g:gundo_width=23
+
+"EasyMotion  \键
+let g:EasyMotion_leader_key = '<Leader>'
+
+"------------------ YouCompleteMe
+let g:ycm_confirm_extra_conf = 0
+
+
+"------------------ ctrlp
+"nnoremap <A-o> :CtrlPFunky<Cr>
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+let g:ctrlp_funky_syntax_highlight = 1
+
+"------------------ taglist
+"We need to install ctags http://ctags.sourceforge.net/ first
+"download it and ./configure; sudo make install.
+"ctags will be installed to /usr/local/bin/ctags
+
+"use /usr/local/bin/ctags on mac
+let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
+" 只显示当前文件的tag
+let Tlist_Show_One_File = 1
+"taglist是最后一个的时候退出vim
+let Tlist_Exit_OnlyWindow = 1
+"open taglist on vim startup
+let Tlist_Auto_Open=1
+let Tlist_Auto_Highlight_Tag=1
+let Tlist_Use_Right_Window=1
+let Tlist_WinWidth=25
+
+"---------------------- vim-javascript
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+
+"--------------------  for pythonist, use vim-pep8-indent instead of pymode
+let g:pymode_indent = 1  "currently use pymode's indent
+let g:pymode_rope = 0
+let g:pymode_lint_write = 1
+let g:pymode_lint = 1
+
+"-------------------- for golang users
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+"-------------------------------------插件配置end-----------------------------1}}}
+
+func! Runit()
+    exec "w"
+    if &filetype == 'c'
+        exec "!gcc  % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'java'
+        exec "!javac %"
+        exec "!java %<"
+    elseif &filetype == 'php'
+        exec "!php %"
+    elseif &filetype =='python'
+        exec "!python %"
+    elseif &filetype=='ruby'
+        exec "!ruby %"
+    elseif &filetype=='javascript'
+        exec "!node %"
+    elseif &filetype=='sh'
+        exec "!sh %"
+    elseif &filetype=='go'
+        exec "!go run %"
+    elseif &filetype=='coffee'
+        exec "!coffee %"
+    elseif &filetype=='less'
+        exec "!lessc % %<.css"
+    elseif &filetype=='lua'
+        exec "!lua %"
+    endif
+endfunc
+
+
+"-------------------------- 键 map-------------------------------------{{{1
+
+"这样在normal模式下在一行中按下0就跳到了行首,按下9到行尾
+"noremap 0 ^
+"noremap 9 $
+
+"快速的通过w和方向键在窗口之间跳转
+noremap w<up> <c-w><up>
+noremap wk <c-w><up>
+noremap w<left> <c-w><left>
+noremap wh <c-w><left>
+noremap w<right> <c-w><right>
+noremap wl <c-w><right>
+noremap w<down> <c-w><down>
+noremap wj <c-w><down>
+
+"--------------- 系统剪切板 ---------------
+
+"map <C-c> "+y
+"map <C-v> "+p
+"----------------------------------------------------------------------1}}}
+
+"--------------  用户自定义命令 --------------------------------------{{{1
+":R快速执行程序
+:command R :call Runit()
+"自动PEP8修改当前py文件
+":command PEP8 :!autopep8 -i %
+"打开/关闭Nerdtree
+:command NT :NERDTreeToggle
+"打开/关闭tagbar
+:command TG :TlistToggle
+"打开YankRing
+:command YR :YRShow
+"打开关闭Gundo
+:command GD :GundoToggle
+"清楚行尾空白
+:command WS :%s/\s\+$//e
+
+
+"新建.py,.sh文件，自动插入文件头
+autocmd BufNewFile *.py,*sh exec ":call SetTitle()"
+""定义函数SetTitle，自动插入文件头
+func SetTitle()
+    "如果文件类型为.py文件
+    if &filetype == 'python'
+        call setline(1,"\#!/usr/bin/env python")
+        call append(line("."), "\# -*- coding: utf-8 -*-")
+        call append(line(".")+1,"")
+        call append(line(".")+2, "\"\"\"")
+        call append(line(".")+3, "Copyright (c) 2015,掌阅科技")
+        call append(line(".")+4, "All rights reserved.")
+        call append(line(".")+5, "")
+        call append(line(".")+6, "摘    要: ".expand("%"))
+        call append(line(".")+7, "创 建 者: yanweihong")
+        call append(line(".")+8, "创建日期: ".strftime("%F"))
+        call append(line(".")+9, "\"\"\"")
+        call append(line(".")+10, "")
+        call append(line(".")+11, "")
+        call append(line(".")+12, "if __name__ == '__main__':")
+        call append(line(".")+13, "    pass")
+        call append(line(".")+14, "")
+    elseif &filetype == 'sh'
+        call setline(1, "\###########################################")
+        call append(line("."),   "\# 摘    要: ".expand("%"))
+        call append(line(".")+1, "\# 创 建 者: yanweihong")
+        call append(line(".")+2, "\# 创建日期: ".strftime("%F"))
+        call append(line(".")+3, "\###########################################")
+        call append(line(".")+4,"\#!/bin/bash")
+        call append(line(".")+5, "")
+        call append(line(".")+6, "")
+    endif
+    "新建文件后，自动定位到文件末尾
+    autocmd BufNewFile * normal G
+endfunc
+" ---------------------------------------------------------------------1}}}
+"
+autocmd BufWrite *.c :WS
+autocmd BufWrite *.h :WS
+autocmd BufWrite *.go :WS
+autocmd BufWrite *.js :WS
+autocmd BufWrite *.html :WS
+
+":w!! to sudo write file
