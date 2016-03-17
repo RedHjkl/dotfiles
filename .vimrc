@@ -307,6 +307,9 @@ let Tlist_Auto_Highlight_Tag=1
 let Tlist_Use_Right_Window=1
 let Tlist_WinWidth=25
 
+"------------------ taglist
+set tags=tags;
+
 "---------------------- vim-javascript
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
