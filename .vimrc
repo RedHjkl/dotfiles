@@ -1,6 +1,8 @@
+set shell=/bin/bash
 " -------- Vundle
 set nocompatible               " be iMproved
 filetype off                   " required!
+
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -21,6 +23,8 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tacahiroy/ctrlp-funky'
 "Plugin 'kien/ctrlp.vim'
 Plugin 'taglist.vim'
+Plugin 'L9'
+Plugin 'FuzzyFinder'
 
 "--------- Edit
 "Plugin 'Valloric/YouCompleteMe'
@@ -38,16 +42,17 @@ Plugin 'garbas/vim-snipmate'
 "--------- Javascript
 Plugin 'jsbeautify'
 Plugin 'jQuery'
-Plugin 'pangloss/vim-javascript'
+"Plugin 'pangloss/vim-javascript'
 
 "-------- Python
 Plugin 'pep8'
 Plugin 'python.vim--Vasiliev'
 Plugin 'hynek/vim-python-pep8-indent'
-"Plugin 'davidhalter/jedi-vim'
+Plugin 'davidhalter/jedi-vim'
 
 "-------- Git
 Plugin 'tpope/vim-fugitive'
+Plugin 'vim-gitgutter'
 
 "-------- C/C++
 Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -258,15 +263,17 @@ hi Normal ctermbg=NONE
 
 " --------------------- Nerdtree:窗口浏览器:NERDTreeToggle {{{2
 "vim启动的时候打开nerdtree
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
 "打开一个未指明的文件时也打开nerdtree
 "autocmd vimenter * if !argc() | NERDTree | endif
 "最后只剩下nerdtree的时候关闭之
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "nerdtree 的宽度
-let NERDTreeWinSize = 25
+let NERDTreeWinSize = 45
 "显示行号
 let NERDTreeShowLineNumbers=1
+let NERDTreeWinSizePos=1
+let NERDTreeWinPos=1
 let NERDTreeIgnore=['\.pyc$', '\~$']
 "---------------------------------------------------------- 2}}}
 
@@ -296,7 +303,8 @@ let g:ctrlp_funky_syntax_highlight = 1
 "ctags will be installed to /usr/local/bin/ctags
 
 "use /usr/local/bin/ctags on mac
-let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
+let g:Tlist_Ctags_Cmd='/usr/bin/ctags'
+"let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
 " 只显示当前文件的tag
 let Tlist_Show_One_File = 1
 "taglist是最后一个的时候退出vim
@@ -304,8 +312,8 @@ let Tlist_Exit_OnlyWindow = 1
 "open taglist on vim startup
 let Tlist_Auto_Open=1
 let Tlist_Auto_Highlight_Tag=1
-let Tlist_Use_Right_Window=1
-let Tlist_WinWidth=25
+let Tlist_Use_Right_Window=0
+let Tlist_WinWidth=35
 
 "------------------ taglist
 set tags=tags;
@@ -400,6 +408,14 @@ noremap wj <c-w><down>
 :command GD :GundoToggle
 "清楚行尾空白
 :command WS :%s/\s\+$//e
+
+" fuzzyfinder
+let mapleader = "\\"
+map <leader>F :FufFile<CR>
+map <leader>f :FufTaggedFile<CR>
+map <leader>g :FufTag<CR>
+map <leader>b :FufBuffer<CR>
+"
 
 
 "新建.py,.sh文件，自动插入文件头
